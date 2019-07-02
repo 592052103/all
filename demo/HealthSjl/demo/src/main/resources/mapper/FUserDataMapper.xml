@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjl.health.mapper.FUserDataMapper">
+  <resultMap id="BaseResultMap" type="com.sjl.health.entity.FUserData">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="clinic_index" jdbcType="VARCHAR" property="clinicIndex" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="user_login" jdbcType="VARCHAR" property="userLogin" />
+    <result column="user_fds_passport_num" jdbcType="VARCHAR" property="userFdsPassportNum" />
+    <result column="flow_no" jdbcType="VARCHAR" property="flowNo" />
+    <result column="flow_batch_id" jdbcType="BIGINT" property="flowBatchId" />
+    <result column="flow_point_id" jdbcType="INTEGER" property="flowPointId" />
+    <result column="service_point_id" jdbcType="SMALLINT" property="servicePointId" />
+    <result column="field_name" jdbcType="VARCHAR" property="fieldName" />
+    <result column="field_value" jdbcType="VARCHAR" property="fieldValue" />
+    <result column="record_time" jdbcType="TIMESTAMP" property="recordTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="modify_user_id" jdbcType="VARCHAR" property="modifyUserId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, clinic_index, user_type, user_login, user_fds_passport_num, flow_no, 
+    flow_batch_id, flow_point_id, service_point_id, field_name, field_value, record_time, 
+    status, modify_user_id, modify_time, create_user_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from f_user_data
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from f_user_data
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sjl.health.entity.FUserData">
+    insert into f_user_data (id, user_id, clinic_index, 
+      user_type, user_login, user_fds_passport_num, 
+      flow_no, flow_batch_id, flow_point_id, 
+      service_point_id, field_name, field_value, 
+      record_time, status, modify_user_id, 
+      modify_time, create_user_id, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{clinicIndex,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR}, #{userLogin,jdbcType=VARCHAR}, #{userFdsPassportNum,jdbcType=VARCHAR}, 
+      #{flowNo,jdbcType=VARCHAR}, #{flowBatchId,jdbcType=BIGINT}, #{flowPointId,jdbcType=INTEGER}, 
+      #{servicePointId,jdbcType=SMALLINT}, #{fieldName,jdbcType=VARCHAR}, #{fieldValue,jdbcType=VARCHAR}, 
+      #{recordTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{modifyUserId,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjl.health.entity.FUserData">
+    insert into f_user_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="clinicIndex != null">
+        clinic_index,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="userLogin != null">
+        user_login,
+      </if>
+      <if test="userFdsPassportNum != null">
+        user_fds_passport_num,
+      </if>
+      <if test="flowNo != null">
+        flow_no,
+      </if>
+      <if test="flowBatchId != null">
+        flow_batch_id,
+      </if>
+      <if test="flowPointId != null">
+        flow_point_id,
+      </if>
+      <if test="servicePointId != null">
+        service_point_id,
+      </if>
+      <if test="fieldName != null">
+        field_name,
+      </if>
+      <if test="fieldValue != null">
+        field_value,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicIndex != null">
+        #{clinicIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogin != null">
+        #{userLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="userFdsPassportNum != null">
+        #{userFdsPassportNum,jdbcType=VARCHAR},
+      </if>
+      <if test="flowNo != null">
+        #{flowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="flowBatchId != null">
+        #{flowBatchId,jdbcType=BIGINT},
+      </if>
+      <if test="flowPointId != null">
+        #{flowPointId,jdbcType=INTEGER},
+      </if>
+      <if test="servicePointId != null">
+        #{servicePointId,jdbcType=SMALLINT},
+      </if>
+      <if test="fieldName != null">
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldValue != null">
+        #{fieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="modifyUserId != null">
+        #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjl.health.entity.FUserData">
+    update f_user_data
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicIndex != null">
+        clinic_index = #{clinicIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogin != null">
+        user_login = #{userLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="userFdsPassportNum != null">
+        user_fds_passport_num = #{userFdsPassportNum,jdbcType=VARCHAR},
+      </if>
+      <if test="flowNo != null">
+        flow_no = #{flowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="flowBatchId != null">
+        flow_batch_id = #{flowBatchId,jdbcType=BIGINT},
+      </if>
+      <if test="flowPointId != null">
+        flow_point_id = #{flowPointId,jdbcType=INTEGER},
+      </if>
+      <if test="servicePointId != null">
+        service_point_id = #{servicePointId,jdbcType=SMALLINT},
+      </if>
+      <if test="fieldName != null">
+        field_name = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldValue != null">
+        field_value = #{fieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjl.health.entity.FUserData">
+    update f_user_data
+    set user_id = #{userId,jdbcType=VARCHAR},
+      clinic_index = #{clinicIndex,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      user_login = #{userLogin,jdbcType=VARCHAR},
+      user_fds_passport_num = #{userFdsPassportNum,jdbcType=VARCHAR},
+      flow_no = #{flowNo,jdbcType=VARCHAR},
+      flow_batch_id = #{flowBatchId,jdbcType=BIGINT},
+      flow_point_id = #{flowPointId,jdbcType=INTEGER},
+      service_point_id = #{servicePointId,jdbcType=SMALLINT},
+      field_name = #{fieldName,jdbcType=VARCHAR},
+      field_value = #{fieldValue,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getFlowPointFieldsValue" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from f_user_data u
+    where 1=1
+    and u.field_name in 
+    <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item.fieldName}
+    </foreach> 
+    order by flow_batch_id
+  </select>
+  
+</mapper>

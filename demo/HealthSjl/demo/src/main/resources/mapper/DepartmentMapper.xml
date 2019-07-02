@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjl.health.mapper.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.sjl.health.entity.Department">
+    <id column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="clinic_id" jdbcType="VARCHAR" property="clinicId" />
+    <result column="department_index" jdbcType="VARCHAR" property="departmentIndex" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="department_parent_id" jdbcType="INTEGER" property="departmentParentId" />
+    <result column="modify_user_id" jdbcType="VARCHAR" property="modifyUserId" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    department_id, clinic_id, department_index, department_name, status, sort, department_parent_id, 
+    modify_user_id, create_user_id, create_time, note
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_department
+    where department_id = #{departmentId,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from b_department
+    where department_id = #{departmentId,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.sjl.health.entity.Department">
+    insert into b_department (
+      clinic_id, 
+      department_index, 
+      department_name, 
+      status, 
+      sort, 
+      department_parent_id, 
+      modify_user_id, 
+      create_user_id, 
+      create_time, note)
+    values (
+      #{clinicId,jdbcType=VARCHAR}, 
+      #{departmentIndex,jdbcType=VARCHAR}, 
+      #{departmentName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, 
+      #{departmentParentId,jdbcType=INTEGER}, 
+      #{modifyUserId,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.sjl.health.entity.Department">
+    insert into b_department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="clinicId != null">
+        clinic_id,
+      </if>
+      <if test="departmentIndex != null">
+        department_index,
+      </if>
+      <if test="departmentName != null">
+        department_name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="departmentParentId != null">
+        department_parent_id,
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="clinicId != null">
+        #{clinicId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentIndex != null">
+        #{departmentIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="departmentParentId != null">
+        #{departmentParentId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyUserId != null">
+        #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjl.health.entity.Department">
+    update b_department
+    <set>
+      <if test="clinicId != null">
+        clinic_id = #{clinicId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentIndex != null">
+        department_index = #{departmentIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="departmentParentId != null">
+        department_parent_id = #{departmentParentId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where department_id = #{departmentId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.sjl.health.entity.Department">
+    update b_department
+    set clinic_id = #{clinicId,jdbcType=VARCHAR},
+      department_index = #{departmentIndex,jdbcType=VARCHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      department_parent_id = #{departmentParentId,jdbcType=INTEGER},
+      modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR}
+    where department_id = #{departmentId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 分页查询Department表信息  -->
+  <select id="getPageOfDepartment" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_department D
+    order by D.department_index
+    <if test="start != null">
+    limit #{start,jdbcType=INTEGER},
+    </if>
+    <if test="pageSize != null">
+    #{pageSize,jdbcType=INTEGER}
+    </if>
+  </select>
+  
+  
+  
+</mapper>

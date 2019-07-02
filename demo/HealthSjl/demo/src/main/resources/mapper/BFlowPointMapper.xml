@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjl.health.mapper.BFlowPointMapper">
+
+  <resultMap id="BaseResultMap" type="com.sjl.health.entity.BFlowPoint">
+  
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="clinic_index" jdbcType="VARCHAR" property="clinicIndex" />
+    <result column="flow_no" jdbcType="VARCHAR" property="flowNo" />
+    <result column="flow_point_id" jdbcType="SMALLINT" property="flowPointId" />
+    <result column="flow_point_seq" jdbcType="SMALLINT" property="flowPointSeq" />
+    <result column="flow_point_name" jdbcType="VARCHAR" property="flowPointName" />
+    <result column="flow_point_type" jdbcType="VARCHAR" property="flowPointType" />
+    <result column="interface_type" jdbcType="SMALLINT" property="interfaceType" />
+    <result column="interface_index" jdbcType="VARCHAR" property="interfaceIndex" />
+    <result column="is_flow_finish" jdbcType="SMALLINT" property="isFlowFinish" />
+    <result column="flag" jdbcType="SMALLINT" property="flag" />
+    <result column="modify_user_id" jdbcType="VARCHAR" property="modifyUserId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />  
+    
+    <association property="bFlowPointRole" javaType="com.sjl.health.entity.BFlowPointRole">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="clinic_index" jdbcType="VARCHAR" property="clinicIndex" />
+    <result column="flow_no" jdbcType="VARCHAR" property="flowNo" />
+    <result column="flow_point_id" jdbcType="INTEGER" property="flowPointId" />
+    <result column="role_index" jdbcType="INTEGER" property="roleIndex" />
+    </association>
+    
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, clinic_index, flow_no, flow_point_id, flow_point_seq, flow_point_name, flow_point_type, 
+    interface_type, interface_index, is_flow_finish, flag, modify_user_id, modify_time, 
+    create_user_id, create_time
+  </sql>
+  
+  <sql id="Base_Column_List_index">
+    p.id, p.clinic_index, p.flow_no, p.flow_point_id, p.flow_point_seq, p.flow_point_name, p.flow_point_type, 
+    p.interface_type, p.interface_index, p.is_flow_finish, p.flag, p.modify_user_id, p.modify_time, 
+    p.create_user_id, p.create_time
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List_index" />
+    <!-- <include refid="Base_Column_List" /> -->
+    from b_flow_point p left join b_flow_point_role r
+    on p.clinic_index = r.clinic_index
+    and p.flow_no = r.flow_no
+    and p.flow_point_id = r.flow_point_id
+    where p.id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from b_flow_point
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sjl.health.entity.BFlowPoint">
+    insert into b_flow_point (id, clinic_index, flow_no, 
+      flow_point_id, flow_point_seq, flow_point_name, 
+      flow_point_type, interface_type, interface_index, 
+      is_flow_finish, flag, modify_user_id, 
+      modify_time, create_user_id, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{clinicIndex,jdbcType=VARCHAR}, #{flowNo,jdbcType=VARCHAR}, 
+      #{flowPointId,jdbcType=SMALLINT}, #{flowPointSeq,jdbcType=SMALLINT}, #{flowPointName,jdbcType=VARCHAR}, 
+      #{flowPointType,jdbcType=VARCHAR}, #{interfaceType,jdbcType=SMALLINT}, #{interfaceIndex,jdbcType=VARCHAR}, 
+      #{isFlowFinish,jdbcType=SMALLINT}, #{flag,jdbcType=SMALLINT}, #{modifyUserId,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjl.health.entity.BFlowPoint">
+    insert into b_flow_point
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="clinicIndex != null">
+        clinic_index,
+      </if>
+      <if test="flowNo != null">
+        flow_no,
+      </if>
+      <if test="flowPointId != null">
+        flow_point_id,
+      </if>
+      <if test="flowPointSeq != null">
+        flow_point_seq,
+      </if>
+      <if test="flowPointName != null">
+        flow_point_name,
+      </if>
+      <if test="flowPointType != null">
+        flow_point_type,
+      </if>
+      <if test="interfaceType != null">
+        interface_type,
+      </if>
+      <if test="interfaceIndex != null">
+        interface_index,
+      </if>
+      <if test="isFlowFinish != null">
+        is_flow_finish,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="clinicIndex != null">
+        #{clinicIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="flowNo != null">
+        #{flowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="flowPointId != null">
+        #{flowPointId,jdbcType=SMALLINT},
+      </if>
+      <if test="flowPointSeq != null">
+        #{flowPointSeq,jdbcType=SMALLINT},
+      </if>
+      <if test="flowPointName != null">
+        #{flowPointName,jdbcType=VARCHAR},
+      </if>
+      <if test="flowPointType != null">
+        #{flowPointType,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceType != null">
+        #{interfaceType,jdbcType=SMALLINT},
+      </if>
+      <if test="interfaceIndex != null">
+        #{interfaceIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="isFlowFinish != null">
+        #{isFlowFinish,jdbcType=SMALLINT},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=SMALLINT},
+      </if>
+      <if test="modifyUserId != null">
+        #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjl.health.entity.BFlowPoint">
+    update b_flow_point
+    <set>
+      <if test="clinicIndex != null">
+        clinic_index = #{clinicIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="flowNo != null">
+        flow_no = #{flowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="flowPointId != null">
+        flow_point_id = #{flowPointId,jdbcType=SMALLINT},
+      </if>
+      <if test="flowPointSeq != null">
+        flow_point_seq = #{flowPointSeq,jdbcType=SMALLINT},
+      </if>
+      <if test="flowPointName != null">
+        flow_point_name = #{flowPointName,jdbcType=VARCHAR},
+      </if>
+      <if test="flowPointType != null">
+        flow_point_type = #{flowPointType,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceType != null">
+        interface_type = #{interfaceType,jdbcType=SMALLINT},
+      </if>
+      <if test="interfaceIndex != null">
+        interface_index = #{interfaceIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="isFlowFinish != null">
+        is_flow_finish = #{isFlowFinish,jdbcType=SMALLINT},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=SMALLINT},
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjl.health.entity.BFlowPoint">
+    update b_flow_point
+    set clinic_index = #{clinicIndex,jdbcType=VARCHAR},
+      flow_no = #{flowNo,jdbcType=VARCHAR},
+      flow_point_id = #{flowPointId,jdbcType=SMALLINT},
+      flow_point_seq = #{flowPointSeq,jdbcType=SMALLINT},
+      flow_point_name = #{flowPointName,jdbcType=VARCHAR},
+      flow_point_type = #{flowPointType,jdbcType=VARCHAR},
+      interface_type = #{interfaceType,jdbcType=SMALLINT},
+      interface_index = #{interfaceIndex,jdbcType=VARCHAR},
+      is_flow_finish = #{isFlowFinish,jdbcType=SMALLINT},
+      flag = #{flag,jdbcType=SMALLINT},
+      modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getFlowPointByFlowNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List_index" />,r.role_index
+    from b_flow_point p left join b_flow_point_role r
+    on p.clinic_index = r.clinic_index
+    and p.flow_no = r.flow_no
+    and p.flow_point_id = r.flow_point_id
+    where p.clinic_index = #{bId,jdbcType=VARCHAR}
+    and p.flow_no = #{flowNo,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

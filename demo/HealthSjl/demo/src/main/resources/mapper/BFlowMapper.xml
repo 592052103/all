@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjl.health.mapper.BFlowMapper">
+  <resultMap id="BaseResultMap" type="com.sjl.health.entity.BFlow">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="clinic_index" jdbcType="VARCHAR" property="clinicIndex" />
+    <result column="flow_no" jdbcType="VARCHAR" property="flowNo" />
+    <result column="flow_name" jdbcType="VARCHAR" property="flowName" />
+    <result column="flag" jdbcType="SMALLINT" property="flag" />
+    <result column="modify_user_id" jdbcType="VARCHAR" property="modifyUserId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, clinic_index, flow_no, flow_name, flag, modify_user_id, modify_time, create_user_id, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_flow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from b_flow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sjl.health.entity.BFlow">
+    insert into b_flow (id, clinic_index, flow_no, 
+      flow_name, flag, modify_user_id, 
+      modify_time, create_user_id, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{clinicIndex,jdbcType=VARCHAR}, #{flowNo,jdbcType=VARCHAR}, 
+      #{flowName,jdbcType=VARCHAR}, #{flag,jdbcType=SMALLINT}, #{modifyUserId,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjl.health.entity.BFlow">
+    insert into b_flow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="clinicIndex != null">
+        clinic_index,
+      </if>
+      <if test="flowNo != null">
+        flow_no,
+      </if>
+      <if test="flowName != null">
+        flow_name,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="clinicIndex != null">
+        #{clinicIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="flowNo != null">
+        #{flowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="flowName != null">
+        #{flowName,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=SMALLINT},
+      </if>
+      <if test="modifyUserId != null">
+        #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjl.health.entity.BFlow">
+    update b_flow
+    <set>
+      <if test="clinicIndex != null">
+        clinic_index = #{clinicIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="flowNo != null">
+        flow_no = #{flowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="flowName != null">
+        flow_name = #{flowName,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=SMALLINT},
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjl.health.entity.BFlow">
+    update b_flow
+    set clinic_index = #{clinicIndex,jdbcType=VARCHAR},
+      flow_no = #{flowNo,jdbcType=VARCHAR},
+      flow_name = #{flowName,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=SMALLINT},
+      modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getBFlowListByBFlowRole" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_flow f
+    where 1=1
+    and f.flow_no in 
+    <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item.flowNo}
+    </foreach>
+  </select>
+  
+</mapper>

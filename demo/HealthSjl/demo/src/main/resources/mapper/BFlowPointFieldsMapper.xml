@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjl.health.mapper.BFlowPointFieldsMapper">
+  <resultMap id="BaseResultMap" type="com.sjl.health.entity.BFlowPointFields">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="clinic_index" jdbcType="VARCHAR" property="clinicIndex" />
+    <result column="flow_no" jdbcType="VARCHAR" property="flowNo" />
+    <result column="flow_point_id" jdbcType="VARCHAR" property="flowPointId" />
+    <result column="seq" jdbcType="VARCHAR" property="seq" />
+    <result column="field_name" jdbcType="VARCHAR" property="fieldName" />
+    <result column="is_search_field" jdbcType="VARCHAR" property="isSearchField" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, clinic_index, flow_no, flow_point_id, seq, field_name, is_search_field
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_flow_point_fields
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from b_flow_point_fields
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sjl.health.entity.BFlowPointFields">
+    insert into b_flow_point_fields (id, clinic_index, flow_no, 
+      flow_point_id, seq, field_name, 
+      is_search_field)
+    values (#{id,jdbcType=INTEGER}, #{clinicIndex,jdbcType=VARCHAR}, #{flowNo,jdbcType=VARCHAR}, 
+      #{flowPointId,jdbcType=VARCHAR}, #{seq,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, 
+      #{isSearchField,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjl.health.entity.BFlowPointFields">
+    insert into b_flow_point_fields
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="clinicIndex != null">
+        clinic_index,
+      </if>
+      <if test="flowNo != null">
+        flow_no,
+      </if>
+      <if test="flowPointId != null">
+        flow_point_id,
+      </if>
+      <if test="seq != null">
+        seq,
+      </if>
+      <if test="fieldName != null">
+        field_name,
+      </if>
+      <if test="isSearchField != null">
+        is_search_field,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="clinicIndex != null">
+        #{clinicIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="flowNo != null">
+        #{flowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="flowPointId != null">
+        #{flowPointId,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null">
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="isSearchField != null">
+        #{isSearchField,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjl.health.entity.BFlowPointFields">
+    update b_flow_point_fields
+    <set>
+      <if test="clinicIndex != null">
+        clinic_index = #{clinicIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="flowNo != null">
+        flow_no = #{flowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="flowPointId != null">
+        flow_point_id = #{flowPointId,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        seq = #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null">
+        field_name = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="isSearchField != null">
+        is_search_field = #{isSearchField,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjl.health.entity.BFlowPointFields">
+    update b_flow_point_fields
+    set clinic_index = #{clinicIndex,jdbcType=VARCHAR},
+      flow_no = #{flowNo,jdbcType=VARCHAR},
+      flow_point_id = #{flowPointId,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=VARCHAR},
+      field_name = #{fieldName,jdbcType=VARCHAR},
+      is_search_field = #{isSearchField,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getFlowPointFieldsSearchMenu" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_flow_point_fields
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

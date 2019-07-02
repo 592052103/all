@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjl.health.mapper.BRoleMapper">
+  <resultMap id="BaseResultMap" type="com.sjl.health.entity.BRole">
+    <id column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="clinic_index" jdbcType="VARCHAR" property="clinicIndex" />
+    <result column="role_index" jdbcType="INTEGER" property="roleIndex" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="modify_user_id" jdbcType="VARCHAR" property="modifyUserId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    
+    <collection property="bFlowRoleList" ofType="com.sjl.health.entity.BFlowRole" column="role_index">
+        <id column="id" jdbcType="BIGINT" property="id" />
+	    <result column="clinic_index" jdbcType="VARCHAR" property="clinicIndex" />
+	    <result column="flow_no" jdbcType="VARCHAR" property="flowNo" />
+	    <result column="role_index" jdbcType="INTEGER" property="roleIndex" />
+    </collection>
+    
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, clinic_index, role_index, role_name, note, modify_user_id, modify_time, 
+    create_user_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_role
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from b_role
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sjl.health.entity.BRole">
+    insert into b_role (role_id, clinic_index, role_index, 
+      role_name, note, modify_user_id, 
+      modify_time, create_user_id, create_time
+      )
+    values (#{roleId,jdbcType=BIGINT}, #{clinicIndex,jdbcType=VARCHAR}, #{roleIndex,jdbcType=INTEGER}, 
+      #{roleName,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{modifyUserId,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjl.health.entity.BRole">
+    insert into b_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="clinicIndex != null">
+        clinic_index,
+      </if>
+      <if test="roleIndex != null">
+        role_index,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="clinicIndex != null">
+        #{clinicIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="roleIndex != null">
+        #{roleIndex,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyUserId != null">
+        #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjl.health.entity.BRole">
+    update b_role
+    <set>
+      <if test="clinicIndex != null">
+        clinic_index = #{clinicIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="roleIndex != null">
+        role_index = #{roleIndex,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjl.health.entity.BRole">
+    update b_role
+    set clinic_index = #{clinicIndex,jdbcType=VARCHAR},
+      role_index = #{roleIndex,jdbcType=INTEGER},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjl.health.mapper.PersonnelMapper">
+  <resultMap id="BaseResultMap" type="com.sjl.health.entity.Personnel">
+    <id column="personnel_id" jdbcType="VARCHAR" property="personnelId" />
+    <result column="clinic_id" jdbcType="VARCHAR" property="clinicId" />
+    <result column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="personnel_index" jdbcType="INTEGER" property="personnelIndex" />
+    <result column="superior" jdbcType="VARCHAR" property="superior" />
+    <result column="personnel_name" jdbcType="VARCHAR" property="personnelName" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="login_passwd" jdbcType="VARCHAR" property="loginPasswd" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="personnel_mobile" jdbcType="VARCHAR" property="personnelMobile" />
+    <result column="birth_date" jdbcType="TIMESTAMP" property="birthDate" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="education_background_id" jdbcType="INTEGER" property="educationBackgroundId" />
+    <result column="graduation_school" jdbcType="VARCHAR" property="graduationSchool" />
+    <result column="work_year" jdbcType="DOUBLE" property="workYear" />
+    <result column="jobs_id" jdbcType="INTEGER" property="jobsId" />
+    <result column="national_id" jdbcType="INTEGER" property="nationalId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="modify_user_id" jdbcType="VARCHAR" property="modifyUserId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    personnel_id, clinic_id, department_id, role_id, personnel_index, superior, personnel_name, 
+    login_name, login_passwd, email, personnel_mobile, birth_date, gender, education_background_id, 
+    graduation_school, work_year, jobs_id, national_id, status, modify_user_id, modify_time, 
+    create_user_id, create_time, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_personnel
+    where personnel_id = #{personnelId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from b_personnel
+    where personnel_id = #{personnelId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sjl.health.entity.Personnel">
+    insert into b_personnel (personnel_id, clinic_id, department_id, 
+      role_id, personnel_index, superior, 
+      personnel_name, login_name, login_passwd, 
+      email, personnel_mobile, birth_date, 
+      gender, education_background_id, graduation_school, 
+      work_year, jobs_id, national_id, 
+      status, modify_user_id, modify_time, 
+      create_user_id, create_time, note
+      )
+    values (#{personnelId,jdbcType=VARCHAR}, #{clinicId,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER}, 
+      #{roleId,jdbcType=INTEGER}, #{personnelIndex,jdbcType=INTEGER}, #{superior,jdbcType=VARCHAR}, 
+      #{personnelName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{loginPasswd,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{personnelMobile,jdbcType=VARCHAR}, #{birthDate,jdbcType=TIMESTAMP}, 
+      #{gender,jdbcType=INTEGER}, #{educationBackgroundId,jdbcType=INTEGER}, #{graduationSchool,jdbcType=VARCHAR}, 
+      #{workYear,jdbcType=DOUBLE}, #{jobsId,jdbcType=INTEGER}, #{nationalId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{modifyUserId,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjl.health.entity.Personnel">
+    insert into b_personnel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="personnelId != null">
+        personnel_id,
+      </if>
+      <if test="clinicId != null">
+        clinic_id,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="personnelIndex != null">
+        personnel_index,
+      </if>
+      <if test="superior != null">
+        superior,
+      </if>
+      <if test="personnelName != null">
+        personnel_name,
+      </if>
+      <if test="loginName != null">
+        login_name,
+      </if>
+      <if test="loginPasswd != null">
+        login_passwd,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="personnelMobile != null">
+        personnel_mobile,
+      </if>
+      <if test="birthDate != null">
+        birth_date,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="educationBackgroundId != null">
+        education_background_id,
+      </if>
+      <if test="graduationSchool != null">
+        graduation_school,
+      </if>
+      <if test="workYear != null">
+        work_year,
+      </if>
+      <if test="jobsId != null">
+        jobs_id,
+      </if>
+      <if test="nationalId != null">
+        national_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="personnelId != null">
+        #{personnelId,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicId != null">
+        #{clinicId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="personnelIndex != null">
+        #{personnelIndex,jdbcType=INTEGER},
+      </if>
+      <if test="superior != null">
+        #{superior,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelName != null">
+        #{personnelName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPasswd != null">
+        #{loginPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelMobile != null">
+        #{personnelMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null">
+        #{birthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="educationBackgroundId != null">
+        #{educationBackgroundId,jdbcType=INTEGER},
+      </if>
+      <if test="graduationSchool != null">
+        #{graduationSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="workYear != null">
+        #{workYear,jdbcType=DOUBLE},
+      </if>
+      <if test="jobsId != null">
+        #{jobsId,jdbcType=INTEGER},
+      </if>
+      <if test="nationalId != null">
+        #{nationalId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="modifyUserId != null">
+        #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjl.health.entity.Personnel">
+    update b_personnel
+    <set>
+      <if test="clinicId != null">
+        clinic_id = #{clinicId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="personnelIndex != null">
+        personnel_index = #{personnelIndex,jdbcType=INTEGER},
+      </if>
+      <if test="superior != null">
+        superior = #{superior,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelName != null">
+        personnel_name = #{personnelName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPasswd != null">
+        login_passwd = #{loginPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelMobile != null">
+        personnel_mobile = #{personnelMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null">
+        birth_date = #{birthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="educationBackgroundId != null">
+        education_background_id = #{educationBackgroundId,jdbcType=INTEGER},
+      </if>
+      <if test="graduationSchool != null">
+        graduation_school = #{graduationSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="workYear != null">
+        work_year = #{workYear,jdbcType=DOUBLE},
+      </if>
+      <if test="jobsId != null">
+        jobs_id = #{jobsId,jdbcType=INTEGER},
+      </if>
+      <if test="nationalId != null">
+        national_id = #{nationalId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where personnel_id = #{personnelId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjl.health.entity.Personnel">
+    update b_personnel
+    set clinic_id = #{clinicId,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      role_id = #{roleId,jdbcType=INTEGER},
+      personnel_index = #{personnelIndex,jdbcType=INTEGER},
+      superior = #{superior,jdbcType=VARCHAR},
+      personnel_name = #{personnelName,jdbcType=VARCHAR},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      login_passwd = #{loginPasswd,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      personnel_mobile = #{personnelMobile,jdbcType=VARCHAR},
+      birth_date = #{birthDate,jdbcType=TIMESTAMP},
+      gender = #{gender,jdbcType=INTEGER},
+      education_background_id = #{educationBackgroundId,jdbcType=INTEGER},
+      graduation_school = #{graduationSchool,jdbcType=VARCHAR},
+      work_year = #{workYear,jdbcType=DOUBLE},
+      jobs_id = #{jobsId,jdbcType=INTEGER},
+      national_id = #{nationalId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR}
+    where personnel_id = #{personnelId,jdbcType=VARCHAR}
+  </update>
+</mapper>

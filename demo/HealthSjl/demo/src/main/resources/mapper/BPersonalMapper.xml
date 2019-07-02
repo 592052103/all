@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjl.health.mapper.BPersonalMapper">
+  <resultMap id="BaseResultMap" type="com.sjl.health.entity.BPersonal">
+    <id column="personnel_id" jdbcType="VARCHAR" property="personnelId" />
+    <result column="clinic_index" jdbcType="VARCHAR" property="clinicIndex" />
+    <result column="personnel_index" jdbcType="VARCHAR" property="personnelIndex" />
+    <result column="department_index" jdbcType="INTEGER" property="departmentIndex" />
+    <result column="role_index" jdbcType="INTEGER" property="roleIndex" />
+    <result column="superior_index" jdbcType="VARCHAR" property="superiorIndex" />
+    <result column="personnel_name" jdbcType="VARCHAR" property="personnelName" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="login_passwd" jdbcType="VARCHAR" property="loginPasswd" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="personnel_mobile" jdbcType="VARCHAR" property="personnelMobile" />
+    <result column="birth_date" jdbcType="TIMESTAMP" property="birthDate" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="education_background_id" jdbcType="VARCHAR" property="educationBackgroundId" />
+    <result column="graduation_school" jdbcType="VARCHAR" property="graduationSchool" />
+    <result column="work_year" jdbcType="SMALLINT" property="workYear" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="modify_user_id" jdbcType="VARCHAR" property="modifyUserId" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    
+    <association property="bClinic" javaType="com.sjl.health.entity.BClinic">
+    	<id column="clinic_id" jdbcType="INTEGER" property="clinicId" />
+	    <result column="clinic_index" jdbcType="VARCHAR" property="clinicIndex" />
+	    <result column="clinic_name" jdbcType="VARCHAR" property="clinicName" />
+	    <result column="system_name" jdbcType="VARCHAR" property="systemName" />
+	    <result column="country" jdbcType="VARCHAR" property="country" />
+	    <result column="province" jdbcType="VARCHAR" property="province" />
+	    <result column="city" jdbcType="VARCHAR" property="city" />
+	    <result column="district" jdbcType="VARCHAR" property="district" />
+	    <result column="clinic_address" jdbcType="VARCHAR" property="clinicAddress" />
+	    <result column="status" jdbcType="INTEGER" property="status" />
+	    <result column="clinic_tel" jdbcType="VARCHAR" property="clinicTel" />
+	    <result column="clinic_head" jdbcType="VARCHAR" property="clinicHead" />
+	    <result column="clinic_head_mobile" jdbcType="VARCHAR" property="clinicHeadMobile" />
+	    <result column="clinic_contact" jdbcType="VARCHAR" property="clinicContact" />
+	    <result column="clinic_contact_mobile" jdbcType="VARCHAR" property="clinicContactMobile" />
+	    <result column="clinic_parent_id" jdbcType="VARCHAR" property="clinicParentId" />
+	    <result column="energy_money" jdbcType="INTEGER" property="energyMoney" />
+	    <result column="super_admin_id" jdbcType="VARCHAR" property="superAdminId" />
+	    <result column="modify_user_id" jdbcType="VARCHAR" property="modifyUserId" />
+	    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+	    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+	    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	    <result column="note" jdbcType="VARCHAR" property="note" />
+    </association>
+    
+    <collection property="bFlowRoleList" ofType="com.sjl.health.entity.BFlowRole" column="roleIndex">
+    	<id column="id" jdbcType="BIGINT" property="id" />
+	    <result column="clinic_index" jdbcType="VARCHAR" property="clinicIndex" />
+	    <result column="flow_no" jdbcType="VARCHAR" property="flowNo" />
+	    <result column="role_index" jdbcType="INTEGER" property="roleIndex" />
+    </collection>
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    personnel_id, clinic_index, personnel_index, department_index, role_index, superior_index, 
+    personnel_name, login_name, login_passwd, email, personnel_mobile, birth_date, gender, 
+    education_background_id, graduation_school, work_year, status, modify_user_id, modify_time, 
+    create_user_id, create_time, note
+  </sql>
+  
+  <sql id="Base_Column_List_index">
+    p.personnel_id, p.clinic_index, p.personnel_index, p.department_index, p.role_index, p.superior_index, 
+    p.personnel_name, p.login_name, p.login_passwd, p.email, p.personnel_mobile, p.birth_date, p.gender, 
+    p.education_background_id, p.graduation_school, p.work_year, p.status, p.modify_user_id, p.modify_time, 
+    p.create_user_id, p.create_time, p.note
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_personal
+    where personnel_id = #{personnelId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from b_personal
+    where personnel_id = #{personnelId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sjl.health.entity.BPersonal">
+    insert into b_personal (personnel_id, clinic_index, personnel_index, 
+      department_index, role_index, superior_index, 
+      personnel_name, login_name, login_passwd, 
+      email, personnel_mobile, birth_date, 
+      gender, education_background_id, graduation_school, 
+      work_year, status, modify_user_id, 
+      modify_time, create_user_id, create_time, 
+      note)
+    values (#{personnelId,jdbcType=VARCHAR}, #{clinicIndex,jdbcType=VARCHAR}, #{personnelIndex,jdbcType=VARCHAR}, 
+      #{departmentIndex,jdbcType=INTEGER}, #{roleIndex,jdbcType=INTEGER}, #{superiorIndex,jdbcType=VARCHAR}, 
+      #{personnelName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{loginPasswd,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{personnelMobile,jdbcType=VARCHAR}, #{birthDate,jdbcType=TIMESTAMP}, 
+      #{gender,jdbcType=VARCHAR}, #{educationBackgroundId,jdbcType=VARCHAR}, #{graduationSchool,jdbcType=VARCHAR}, 
+      #{workYear,jdbcType=SMALLINT}, #{status,jdbcType=INTEGER}, #{modifyUserId,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sjl.health.entity.BPersonal">
+    insert into b_personal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="personnelId != null">
+        personnel_id,
+      </if>
+      <if test="clinicIndex != null">
+        clinic_index,
+      </if>
+      <if test="personnelIndex != null">
+        personnel_index,
+      </if>
+      <if test="departmentIndex != null">
+        department_index,
+      </if>
+      <if test="roleIndex != null">
+        role_index,
+      </if>
+      <if test="superiorIndex != null">
+        superior_index,
+      </if>
+      <if test="personnelName != null">
+        personnel_name,
+      </if>
+      <if test="loginName != null">
+        login_name,
+      </if>
+      <if test="loginPasswd != null">
+        login_passwd,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="personnelMobile != null">
+        personnel_mobile,
+      </if>
+      <if test="birthDate != null">
+        birth_date,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="educationBackgroundId != null">
+        education_background_id,
+      </if>
+      <if test="graduationSchool != null">
+        graduation_school,
+      </if>
+      <if test="workYear != null">
+        work_year,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="personnelId != null">
+        #{personnelId,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicIndex != null">
+        #{clinicIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelIndex != null">
+        #{personnelIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentIndex != null">
+        #{departmentIndex,jdbcType=INTEGER},
+      </if>
+      <if test="roleIndex != null">
+        #{roleIndex,jdbcType=INTEGER},
+      </if>
+      <if test="superiorIndex != null">
+        #{superiorIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelName != null">
+        #{personnelName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPasswd != null">
+        #{loginPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelMobile != null">
+        #{personnelMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null">
+        #{birthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="educationBackgroundId != null">
+        #{educationBackgroundId,jdbcType=VARCHAR},
+      </if>
+      <if test="graduationSchool != null">
+        #{graduationSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="workYear != null">
+        #{workYear,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="modifyUserId != null">
+        #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sjl.health.entity.BPersonal">
+    update b_personal
+    <set>
+      <if test="clinicIndex != null">
+        clinic_index = #{clinicIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelIndex != null">
+        personnel_index = #{personnelIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentIndex != null">
+        department_index = #{departmentIndex,jdbcType=INTEGER},
+      </if>
+      <if test="roleIndex != null">
+        role_index = #{roleIndex,jdbcType=INTEGER},
+      </if>
+      <if test="superiorIndex != null">
+        superior_index = #{superiorIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelName != null">
+        personnel_name = #{personnelName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPasswd != null">
+        login_passwd = #{loginPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelMobile != null">
+        personnel_mobile = #{personnelMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null">
+        birth_date = #{birthDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="educationBackgroundId != null">
+        education_background_id = #{educationBackgroundId,jdbcType=VARCHAR},
+      </if>
+      <if test="graduationSchool != null">
+        graduation_school = #{graduationSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="workYear != null">
+        work_year = #{workYear,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where personnel_id = #{personnelId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sjl.health.entity.BPersonal">
+    update b_personal
+    set clinic_index = #{clinicIndex,jdbcType=VARCHAR},
+      personnel_index = #{personnelIndex,jdbcType=VARCHAR},
+      department_index = #{departmentIndex,jdbcType=INTEGER},
+      role_index = #{roleIndex,jdbcType=INTEGER},
+      superior_index = #{superiorIndex,jdbcType=VARCHAR},
+      personnel_name = #{personnelName,jdbcType=VARCHAR},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      login_passwd = #{loginPasswd,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      personnel_mobile = #{personnelMobile,jdbcType=VARCHAR},
+      birth_date = #{birthDate,jdbcType=TIMESTAMP},
+      gender = #{gender,jdbcType=VARCHAR},
+      education_background_id = #{educationBackgroundId,jdbcType=VARCHAR},
+      graduation_school = #{graduationSchool,jdbcType=VARCHAR},
+      work_year = #{workYear,jdbcType=SMALLINT},
+      status = #{status,jdbcType=INTEGER},
+      modify_user_id = #{modifyUserId,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR}
+    where personnel_id = #{personnelId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByloginName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List_index" />
+    ,c.status
+    from b_personal p LEFT JOIN b_clinic c
+    ON p.clinic_index = c.clinic_index
+    WHERE p.login_name = #{loginName,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getRoleByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List_index" />
+    ,fr.flow_no
+    from b_personal p LEFT JOIN b_flow_role fr
+    ON  p.clinic_index = fr.clinic_index
+	AND p.role_index = fr.role_index
+	WHERE p.login_name = #{userName,jdbcType=VARCHAR}
+	AND p.clinic_index = #{clinicIndex,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>
